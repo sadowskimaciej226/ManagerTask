@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "task")
 @Getter
@@ -14,31 +16,12 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    private String description;
+    private LocalDateTime expirationTime;
+    private LocalDateTime startTime;
+    private boolean done;
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
-    Long getId() {
-        return id;
-    }
-
-    void setId(Long id) {
-        this.id = id;
-    }
-
-    String getTitle() {
-        return title;
-    }
-
-    void setTitle(String title) {
-        this.title = title;
-    }
-
-    Client getClient() {
-        return client;
-    }
-
-    void setClient(Client client) {
-        this.client = client;
-    }
 }
