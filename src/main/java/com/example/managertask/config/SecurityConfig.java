@@ -12,7 +12,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         PathRequest.H2ConsoleRequestMatcher h2ConsoleRequestMatcher = PathRequest.toH2Console();
         http.authorizeHttpRequests(request -> request
-                .anyRequest().authenticated());
+                .anyRequest().permitAll());
         http.csrf(csrf -> csrf.disable());
         http.headers(
                 config -> config.frameOptions(
