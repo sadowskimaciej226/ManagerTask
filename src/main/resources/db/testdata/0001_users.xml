@@ -7,9 +7,21 @@
     <changeSet id="0001-testdata-1" author="Maciej S">
         <insert tableName="client">
             <column name="first_name" value="Maciej"/>
+            <column name="last_name" value="Sad"/>
+            <column name="email" value="sadowskimaciej@mail.com"/>
+            <column name="password" value="hard"/>
+            <column name="role" value="user"/>
+            <column name="points" value="10"/>
+            <column name="family_id" value="1"/>
         </insert>
         <insert tableName="client">
             <column name="first_name" value="Iga"/>
+            <column name="last_name" value="Sad"/>
+            <column name="email" value="iga@mail.com"/>
+            <column name="password" value="hardpass"/>
+            <column name="role" value="user"/>
+            <column name="points" value="20"/>
+            <column name="family_id" value="1"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
