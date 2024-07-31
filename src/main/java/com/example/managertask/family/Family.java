@@ -16,6 +16,7 @@ public class Family {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String familyName;
     @OneToMany(mappedBy = "family")
     private List<Client> clients = new ArrayList<>();
 }
