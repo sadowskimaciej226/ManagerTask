@@ -6,7 +6,7 @@
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
     <changeSet id="0001" author="Maciej S">
         <createTable tableName="client">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="first_name" type="VARCHAR(100)" />
@@ -14,7 +14,7 @@
     </changeSet>
     <changeSet id="0002" author="Maciej S">
         <createTable tableName="task">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="title" type="VARCHAR(300)"/>
@@ -26,4 +26,5 @@
                                  referencedTableName="client"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <include file="data.sql" relativeToChangelogFile="true" />
 </databaseChangeLog>
