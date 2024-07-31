@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ClientDto {
+ class ClientDto {
     private String firstName;
     private String lastName;
     private String role;

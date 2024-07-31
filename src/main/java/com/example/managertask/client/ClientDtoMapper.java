@@ -3,7 +3,7 @@ package com.example.managertask.client;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ClientDtoMapper {
+ class ClientDtoMapper {
     ClientDto map(Client client){
         ClientDto dto = new ClientDto();
         dto.setFirstName(client.getFirstName());
