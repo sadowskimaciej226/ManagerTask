@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="0002-testdata-1" author="Maciej S">
+        <insert tableName="task">
+            <column name="title" value="laundry"/>
+            <column name="client_id" value="1"/>
+        </insert>
+        <insert tableName="task">
+            <column name="title" value="vacuming"/>
+            <column name="client_id" value="2"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
