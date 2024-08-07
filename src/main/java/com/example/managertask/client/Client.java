@@ -22,7 +22,8 @@ public class Client {
     private String lastName;
     private String email;
     private String password;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     private int points;
     @ManyToOne
     @JoinColumn(name = "family_id")
