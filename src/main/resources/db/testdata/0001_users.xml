@@ -10,7 +10,7 @@
             <column name="last_name" value="Sad"/>
             <column name="email" value="sadowskimaciej@mail.com"/>
             <column name="password" value="hard"/>
-            <column name="role" value="user"/>
+            <column name="role" value="USER"/>
             <column name="points" value="10"/>
             <column name="family_id" value="1"/>
         </insert>
@@ -19,7 +19,7 @@
             <column name="last_name" value="Sad"/>
             <column name="email" value="iga@mail.com"/>
             <column name="password" value="hardpass"/>
-            <column name="role" value="user"/>
+            <column name="role" value="USER"/>
             <column name="points" value="20"/>
             <column name="family_id" value="1"/>
         </insert>
