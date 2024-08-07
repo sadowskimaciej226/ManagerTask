@@ -10,7 +10,7 @@ import lombok.Setter;
  class ClientDto {
     private String firstName;
     private String lastName;
-    private String role;
+    private Role role;
     private int points;
     private String email;
     private Long familyId;
