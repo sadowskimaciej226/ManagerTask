@@ -13,14 +13,15 @@ public class ClientService {
     private final ClientRepository clientRepository;
     private final ClientDtoMapper clientDtoMapper;
 
-    public Optional<ClientDto> getUserById(Long id) {
+     Optional<ClientDto> getUserById(Long id) {
         return clientRepository.findById(id)
                 .map(clientDtoMapper::map);
     }
     public Optional<Client> getUserByEmail(String email){
        return clientRepository.findClientByEmail(email);
     }
-    public Optional<ClientDto> getClientForCurrentUser(Long id){
+
+    Optional<ClientDto> getUserForCurrentUser(Long id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
 
@@ -33,4 +34,11 @@ public class ClientService {
     public void save(Client client) {
         clientRepository.save(client);
     }
+
+    ClientDto updateUser(ClientDto clientDto){
+        Client client = clientDtoMapper.map(clientDto);
+        Client save = clientRepository.save(client);
+        return clientDtoMapper.map(save);
+    }
+
 }
