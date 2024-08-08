@@ -21,7 +21,7 @@
             <column name="password" value="hardpass"/>
             <column name="role" value="USER"/>
             <column name="points" value="20"/>
-            <column name="family_id" value="1"/>
+            <column name="family_id" value="null"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
