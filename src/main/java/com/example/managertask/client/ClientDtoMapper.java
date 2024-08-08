@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
         dto.setEmail(client.getEmail());
         dto.setRole(client.getRole());
         dto.setPoints(client.getPoints());
-        dto.setFamilyId(client.getFamily().getId());
-        dto.setFamilyName(client.getFamily().getFamilyName());
+        if(client.getFamily()!=null) {
+            dto.setFamilyId(client.getFamily().getId());
+            dto.setFamilyName(client.getFamily().getFamilyName());
+        }
         return dto;
     }
 }
