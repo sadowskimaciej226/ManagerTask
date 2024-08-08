@@ -1,6 +1,8 @@
 package com.example.managertask.client;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,6 +19,15 @@ public class ClientService {
     }
     public Optional<Client> getUserByEmail(String email){
        return clientRepository.findClientByEmail(email);
+    }
+    public Optional<ClientDto> getClientForCurrentUser(Long id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+
+        Optional<Client> client = clientRepository.findById(id);
+        if(client.isPresent() && client.get().getEmail().equals(currentUserName)) {
+            return client.map(clientDtoMapper::map);
+        } else return Optional.empty();
     }
 
     public void save(Client client) {

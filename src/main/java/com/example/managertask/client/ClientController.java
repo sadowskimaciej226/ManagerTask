@@ -18,7 +18,7 @@ import java.util.Optional;
 
     @GetMapping("user/{id}")
  ResponseEntity<ClientDto> getUserById(@PathVariable Long id){
-     return clientService.getUserById(id)
+     return clientService.getClientForCurrentUser(id)
              .map(ResponseEntity::ok)
              .orElse(ResponseEntity.notFound().build());
     }
