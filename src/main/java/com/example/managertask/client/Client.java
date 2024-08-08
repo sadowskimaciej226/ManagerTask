@@ -3,8 +3,7 @@ package com.example.managertask.client;
 import com.example.managertask.family.Family;
 import com.example.managertask.task.Task;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +16,9 @@ import java.util.List;
 @Table(name = "client")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Client implements UserDetails {
 
     @Id
