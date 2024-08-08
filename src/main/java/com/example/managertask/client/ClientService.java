@@ -18,4 +18,8 @@ public class ClientService {
     public Optional<Client> getUserByEmail(String email){
        return clientRepository.findClientByEmail(email);
     }
+
+    public void save(Client client) {
+        clientRepository.save(client);
+    }
 }
