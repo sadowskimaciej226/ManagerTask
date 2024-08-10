@@ -8,8 +8,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
  class ClientDto {
+   private Long id;
     private String firstName;
     private String lastName;
+    private String password;
     private Role role;
     private int points;
     private String email;

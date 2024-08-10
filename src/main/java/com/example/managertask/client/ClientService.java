@@ -35,10 +35,9 @@ public class ClientService {
         clientRepository.save(client);
     }
 
-    ClientDto updateUser(ClientDto clientDto){
+    void updateUser(ClientDto clientDto){
         Client client = clientDtoMapper.map(clientDto);
-        Client save = clientRepository.save(client);
-        return clientDtoMapper.map(save);
+        clientRepository.save(client);
     }
 
 }
