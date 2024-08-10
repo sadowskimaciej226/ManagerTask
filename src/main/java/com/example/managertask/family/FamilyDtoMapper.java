@@ -21,4 +21,10 @@ import java.util.stream.Collectors;
                 .collect(Collectors.toSet()));
         return dto;
     }
+    Family map(FamilyDto dto){
+        Family family = new Family();
+        family.setId(dto.getId());
+        family.setFamilyName(dto.getFamilyName());
+        return family;
+    }
 }

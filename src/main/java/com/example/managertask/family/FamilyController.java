@@ -1,9 +1,10 @@
 package com.example.managertask.family;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
  class FamilyController {
@@ -18,5 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
         return familyService.getFamilyById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+    @PostMapping("/family")
+    ResponseEntity<?> saveFamily(@RequestBody FamilyDto familyDto){
+        FamilyDto responseFamily = familyService.saveFamily(familyDto);
+        URI savedFamily = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(responseFamily.getId())
+                .toUri();
+        return ResponseEntity.created(savedFamily).body(responseFamily);
+
     }
 }

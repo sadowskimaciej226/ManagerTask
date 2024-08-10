@@ -19,4 +19,10 @@ public class FamilyService {
         return familyRepository.findById(id)
                 .map(familyDtoMapper::map);
     }
+    FamilyDto saveFamily(FamilyDto familyDto){
+        Family toSave = familyDtoMapper.map(familyDto);
+        Family saved = familyRepository.save(toSave);
+        return familyDtoMapper.map(saved);
+
+    }
 }
