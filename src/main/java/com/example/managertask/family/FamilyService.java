@@ -1,28 +1,37 @@
 package com.example.managertask.family;
 
+import com.example.managertask.client.Client;
+import com.example.managertask.client.ClientRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class FamilyService {
     private final FamilyRepository familyRepository;
     private final FamilyDtoMapper familyDtoMapper;
+    private final ClientRepository clientRepository;
 
-    public FamilyService(FamilyRepository familyRepository, FamilyDtoMapper familyDtoMapper) {
-        this.familyRepository = familyRepository;
-        this.familyDtoMapper = familyDtoMapper;
-    }
 
 
     Optional<FamilyDto> getFamilyById(Long id){
         return familyRepository.findById(id)
                 .map(familyDtoMapper::map);
     }
-    FamilyDto saveFamily(FamilyDto familyDto){
-        Family toSave = familyDtoMapper.map(familyDto);
-        Family saved = familyRepository.save(toSave);
-        return familyDtoMapper.map(saved);
+    FamilyDto saveFamily(Long id,FamilyDto familyDto) {
+        Client client = clientRepository.findById(id).orElseThrow();
+        if (client.getFamily() == null) {
+            Family toSave = familyDtoMapper.map(familyDto);
+            toSave.setClients(List.of(client));
+            Family saved = familyRepository.save(toSave);
+            return familyDtoMapper.map(saved);
+        }else {
+            throw new IllegalArgumentException();
+        }
 
     }
 }

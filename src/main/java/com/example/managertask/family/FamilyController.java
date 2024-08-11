@@ -20,9 +20,9 @@ import java.net.URI;
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    @PostMapping("/family")
-    ResponseEntity<?> saveFamily(@RequestBody FamilyDto familyDto){
-        FamilyDto responseFamily = familyService.saveFamily(familyDto);
+    @PostMapping("/client/{id}/family")
+    ResponseEntity<?> saveFamily(@PathVariable Long id, @RequestBody FamilyDto familyDto){
+        FamilyDto responseFamily = familyService.saveFamily(id,familyDto);
         URI savedFamily = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(responseFamily.getId())
