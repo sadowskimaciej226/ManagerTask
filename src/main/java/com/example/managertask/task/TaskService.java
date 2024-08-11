@@ -18,4 +18,10 @@ public class TaskService {
         return taskRepository.findById(id)
                 .map(taskDtoMapper::map);
     }
+
+    TaskDto saveTask(TaskDto taskDto) {
+        Task taskToSave = taskDtoMapper.map(taskDto);
+        Task savedTask = taskRepository.save(taskToSave);
+        return taskDtoMapper.map(savedTask);
+    }
 }

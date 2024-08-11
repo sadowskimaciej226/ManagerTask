@@ -1,11 +1,17 @@
 package com.example.managertask.task;
 
+import com.example.managertask.client.Client;
+import com.example.managertask.client.ClientRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class TaskDtoMapper {
+    private final ClientRepository clientRepository;
     TaskDto map(Task task){
         TaskDto dto = new TaskDto();
+        dto.setId(task.getId());
         dto.setTitle(task.getTitle());
         dto.setDescription(task.getDescription());
         dto.setExpirationTime(task.getExpirationTime());
@@ -15,4 +21,17 @@ public class TaskDtoMapper {
         dto.setUser_id(task.getClient().getId());
         return dto;
     }
+    Task map(TaskDto dto){
+        Task task = new Task();
+        task.setId(dto.getId());
+        task.setTitle(dto.getTitle());
+        task.setDescription(dto.getDescription());
+        task.setExpirationTime(dto.getExpirationTime());
+        task.setStartTime(dto.getStartTime());
+        task.setDone(dto.isDone());
+        Client client = clientRepository.findById(dto.getUser_id()).orElseThrow();
+        task.setClient(client);
+        return task;
+    }
+
 }
