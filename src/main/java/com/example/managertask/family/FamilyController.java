@@ -1,5 +1,6 @@
 package com.example.managertask.family;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -7,12 +8,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
+@RequiredArgsConstructor
  class FamilyController {
     private final FamilyService familyService;
-
-    FamilyController(FamilyService familyService) {
-        this.familyService = familyService;
-    }
 
     @GetMapping("/family/{id}")
     ResponseEntity<FamilyDto> getFamilyById(@PathVariable Long id){
