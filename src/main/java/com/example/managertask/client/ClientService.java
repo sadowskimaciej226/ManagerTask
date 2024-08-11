@@ -22,13 +22,17 @@ public class ClientService {
     }
 
     Optional<ClientDto> getUserForCurrentUser(Long id){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUserName = authentication.getName();
+
+        String currentUserName = getCurrentUsername(id);
 
         Optional<Client> client = clientRepository.findById(id);
         if(client.isPresent() && client.get().getEmail().equals(currentUserName)) {
             return client.map(clientDtoMapper::map);
         } else return Optional.empty();
+    }
+    String getCurrentUsername(Long id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 
     public void save(Client client) {
@@ -37,7 +41,11 @@ public class ClientService {
 
     void updateUser(ClientDto clientDto){
         Client client = clientDtoMapper.map(clientDto);
-        clientRepository.save(client);
+        if(client.getEmail().equals(getCurrentUsername(clientDto.getId()))) {
+            clientRepository.save(client);
+        }else {
+            throw new IllegalArgumentException();
+        }
     }
 
 }
