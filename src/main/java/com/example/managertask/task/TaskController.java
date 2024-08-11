@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
  class TaskController {
@@ -28,5 +29,11 @@ import java.net.URI;
                 .buildAndExpand(dto.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(dto);
+    }
+    @GetMapping("/client/task/{id}")
+    ResponseEntity<List<TaskDto>> getAllUserTask(@PathVariable Long id){
+        if(taskService.getTasksByUserId(id).isEmpty())
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(taskService.getTasksByUserId(id));
     }
 }
