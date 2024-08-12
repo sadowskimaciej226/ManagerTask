@@ -39,16 +39,24 @@ public class TaskService {
     void deleteTask(Long id){
         taskRepository.deleteById(id);
     }
-    @Scheduled(cron = "0 0 0 * * ?")
-    void createNewTaskByPeriodicity(){
+    void setNewExpirationTime(Periodicity periodicity, long hours){
         LocalDateTime now = LocalDateTime.now();
         List<Task> taskToChange = taskRepository
-                .findByPeriodicityAndExpirationTimeAfter(Periodicity.EVERY_DAY, now);
-
+                .findByPeriodicityAndExpirationTimeAfter(periodicity, now);
         taskToChange.forEach(task -> {
-            task.setExpirationTime(now.plusHours(24));
+            task.setExpirationTime(now.plusHours(hours));
             taskRepository.save(task);
         });
+    }
+
+    @Scheduled(cron = "0 0 0 * * ?")
+    void updateExpirationTimeEveryDay(){
+       setNewExpirationTime(Periodicity.EVERY_DAY, 24);
+    }
+
+    @Scheduled(cron = "0 0 0 1 * SUN")
+    void updateExpirationTimeEverySunday(){
+        setNewExpirationTime(Periodicity.EVERY_WEEK, 24*31);
     }
 
 
