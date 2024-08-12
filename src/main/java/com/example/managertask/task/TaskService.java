@@ -12,7 +12,7 @@ import java.util.Optional;
 public class TaskService {
     private final TaskRepository taskRepository;
     private final TaskDtoMapper taskDtoMapper;
-    private final ClientService clientService;
+
 
     Optional<TaskDto> getTaskById(Long id){
         return taskRepository.findById(id)
@@ -32,4 +32,8 @@ public class TaskService {
         Task toUpdate = taskDtoMapper.map(taskDto);
         taskRepository.save(toUpdate);
     }
+    void deleteTask(Long id){
+        taskRepository.deleteById(id);
+    }
+
 }
