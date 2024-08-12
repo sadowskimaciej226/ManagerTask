@@ -2,8 +2,10 @@ package com.example.managertask.task;
 
 import com.example.managertask.client.ClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,9 @@ public class TaskService {
         return taskDtoMapper.map(savedTask);
     }
     List<TaskDto> getTasksByUserId(Long id){
-        List<Task> clientTasks = taskRepository.findByClientId(id);
+        LocalDateTime now = LocalDateTime.now();
+        List<Task> clientTasks = taskRepository
+                .findByExpirationTimeAfterAndClientId(now, id);
        return clientTasks.stream().map(taskDtoMapper::map).toList();
     }
     void updateTask(TaskDto taskDto){
@@ -35,5 +39,17 @@ public class TaskService {
     void deleteTask(Long id){
         taskRepository.deleteById(id);
     }
+    @Scheduled(cron = "0 0 0 * * ?")
+    void createNewTaskByPeriodicity(){
+        LocalDateTime now = LocalDateTime.now();
+        List<Task> taskToChange = taskRepository
+                .findByPeriodicityAndExpirationTimeAfter(Periodicity.EVERY_DAY, now);
+
+        taskToChange.forEach(task -> {
+            task.setExpirationTime(now.plusHours(24));
+            taskRepository.save(task);
+        });
+    }
+
 
 }
