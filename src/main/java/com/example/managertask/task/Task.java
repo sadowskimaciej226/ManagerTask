@@ -19,6 +19,8 @@ public class Task {
     private String description;
     private LocalDateTime expirationTime;
     private LocalDateTime startTime;
+    @Enumerated(EnumType.STRING)
+    private Periodicity periodicity;
     private boolean done;
     @ManyToOne
     @JoinColumn(name = "client_id")

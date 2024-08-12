@@ -10,6 +10,7 @@
             <column name="description" value="white cloths"/>
             <column name="expiration_time" value="2024-08-01 23:59:59"/>
             <column name="start_time" value="2024-08-01 10:00:00"/>
+            <column name="periodicity" value="EVERY_DAY"/>
             <column name="done" value="false"/>
             <column name="client_id" value="1"/>
         </insert>
@@ -18,6 +19,7 @@
             <column name="description" value="vacumm all living room and the kitchen"/>
             <column name="expiration_time" value="2024-08-01 23:59:59"/>
             <column name="start_time" value="2024-08-01 11:59:59"/>
+            <column name="periodicity" value="EVERY_WEEK"/>
             <column name="done" value="true"/>
             <column name="client_id" value="2"/>
         </insert>
