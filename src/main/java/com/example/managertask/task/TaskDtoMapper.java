@@ -17,8 +17,10 @@ public class TaskDtoMapper {
         dto.setExpirationTime(task.getExpirationTime());
         dto.setStartTime(task.getStartTime());
         dto.setDone(task.isDone());
-        dto.setUsername(task.getClient().getFirstName());
-        dto.setUser_id(task.getClient().getId());
+        if(task.getClient()!=null) {
+            dto.setUsername(task.getClient().getFirstName());
+            dto.setUser_id(task.getClient().getId());
+        }
         return dto;
     }
     Task map(TaskDto dto){
@@ -29,8 +31,10 @@ public class TaskDtoMapper {
         task.setExpirationTime(dto.getExpirationTime());
         task.setStartTime(dto.getStartTime());
         task.setDone(dto.isDone());
-        Client client = clientRepository.findById(dto.getUser_id()).orElseThrow();
-        task.setClient(client);
+        if(dto.getUser_id()!=null) {
+            Client client = clientRepository.findById(dto.getUser_id()).orElseThrow();
+            task.setClient(client);
+        }
         return task;
     }
 
