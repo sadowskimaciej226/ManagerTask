@@ -28,4 +28,8 @@ public class TaskService {
         List<Task> clientTasks = taskRepository.findByClientId(id);
        return clientTasks.stream().map(taskDtoMapper::map).toList();
     }
+    void updateTask(TaskDto taskDto){
+        Task toUpdate = taskDtoMapper.map(taskDto);
+        taskRepository.save(toUpdate);
+    }
 }
