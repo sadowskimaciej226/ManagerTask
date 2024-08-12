@@ -19,9 +19,6 @@ import java.util.Optional;
  private final ClientService clientService;
  private final ObjectMapper objectMapper;
 
-
-
-
     @GetMapping("user/{id}")
  ResponseEntity<ClientDto> getUserById(@PathVariable Long id){
      return clientService.getUserForCurrentUser(id)
@@ -47,6 +44,4 @@ import java.util.Optional;
         JsonNode clientPatchedNode = patch.apply(clientNode);
         return objectMapper.treeToValue(clientPatchedNode, ClientDto.class);
     }
-
-
 }
