@@ -16,6 +16,7 @@ public class TaskDtoMapper {
         dto.setDescription(task.getDescription());
         dto.setExpirationTime(task.getExpirationTime());
         dto.setStartTime(task.getStartTime());
+        dto.setPeriodicity(task.getPeriodicity());
         dto.setDone(task.isDone());
         if(task.getClient()!=null) {
             dto.setUsername(task.getClient().getFirstName());
@@ -31,6 +32,7 @@ public class TaskDtoMapper {
         task.setExpirationTime(dto.getExpirationTime());
         task.setStartTime(dto.getStartTime());
         task.setDone(dto.isDone());
+        task.setPeriodicity(dto.getPeriodicity());
         if(dto.getUser_id()!=null) {
             Client client = clientRepository.findById(dto.getUser_id()).orElseThrow();
             task.setClient(client);

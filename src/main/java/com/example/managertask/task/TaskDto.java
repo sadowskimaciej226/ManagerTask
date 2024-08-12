@@ -13,6 +13,7 @@ public class TaskDto {
     private String description;
     private LocalDateTime expirationTime;
     private LocalDateTime startTime;
+    private Periodicity periodicity;
     private boolean done;
     private Long user_id;
     private String username;
