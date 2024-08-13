@@ -1,6 +1,6 @@
 package com.example.managertask.task;
 
-import com.example.managertask.client.ClientService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -54,9 +54,13 @@ public class TaskService {
        setNewExpirationTime(Periodicity.EVERY_DAY, 24);
     }
 
-    @Scheduled(cron = "0 0 0 1 * SUN")
+    @Scheduled(cron = "0 0 0 * * SUN")
     void updateExpirationTimeEverySunday(){
-        setNewExpirationTime(Periodicity.EVERY_WEEK, 24*31);
+        setNewExpirationTime(Periodicity.EVERY_WEEK, 24*7);
+    }
+    @Scheduled(cron = "0 0 0 1 * ?")
+    void updateExpirationTimeEveryMonth(){
+        setNewExpirationTime(Periodicity.EVERY_MONTH, 24*31);
     }
 
 
