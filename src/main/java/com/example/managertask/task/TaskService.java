@@ -1,19 +1,24 @@
 package com.example.managertask.task;
 
 
+import com.example.managertask.client.Client;
+import com.example.managertask.client.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
 public class TaskService {
     private final TaskRepository taskRepository;
     private final TaskDtoMapper taskDtoMapper;
+    private final ClientRepository clientRepository;
 
 
     Optional<TaskDto> getTaskById(Long id){
@@ -32,6 +37,16 @@ public class TaskService {
                 .findByExpirationTimeAfterAndClientId(now, id);
        return clientTasks.stream().map(taskDtoMapper::map).toList();
     }
+    List<TaskDto> getAllTaskByFamilyId(Long id){
+        List<Client> clientsInFamily = clientRepository.findAllByFamilyId(id);
+        return clientsInFamily
+                .stream().map(client -> {
+                    return client.getTasks().stream().map(taskDtoMapper::map).toList();
+                })
+                .flatMap(Collection::stream)
+                .toList();
+
+    }
     void updateTask(TaskDto taskDto){
         Task toUpdate = taskDtoMapper.map(taskDto);
         taskRepository.save(toUpdate);
@@ -48,6 +63,7 @@ public class TaskService {
             taskRepository.save(task);
         });
     }
+
 
     @Scheduled(cron = "0 0 0 * * ?")
     void updateExpirationTimeEveryDay(){

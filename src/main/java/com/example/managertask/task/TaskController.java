@@ -42,6 +42,13 @@ import java.util.NoSuchElementException;
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(taskService.getTasksByUserId(id));
     }
+
+    @GetMapping("/family/{id}")
+    ResponseEntity<List<TaskDto>> getAllTaskByFamilyId(@PathVariable Long id){
+        if(taskService.getAllTaskByFamilyId(id).isEmpty())
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(taskService.getAllTaskByFamilyId(id));
+    }
     @PatchMapping("{id}")
     ResponseEntity<?> updateTask(@PathVariable Long id, @RequestBody JsonMergePatch patch){
         try {
