@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="0004-1" author="Maciej S">
+        <createTable tableName="invitation">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="created_date" type="DATETIME"/>
+            <column name="inviter_id" type="BIGINT"/>
+            <column name="invitee_id" type="BIGINT"/>
+            <column name="family_id" type="BIGINT"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="invitation"
+                                 baseColumnNames="inviter_id"
+                                 constraintName="fk_invitation_inviter_id"
+                                 referencedTableName="client"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="invitation"
+                                 baseColumnNames="invitee_id"
+                                 constraintName="fk_invitation_invitee_id"
+                                 referencedTableName="client"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="invitation"
+                                 baseColumnNames="family_id"
+                                 constraintName="fk_invitation_family_id"
+                                 referencedTableName="client"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

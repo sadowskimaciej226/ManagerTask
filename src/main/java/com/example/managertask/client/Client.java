@@ -1,5 +1,6 @@
 package com.example.managertask.client;
 
+import com.example.managertask.client.invite.Invitation;
 import com.example.managertask.family.Family;
 import com.example.managertask.task.Task;
 import jakarta.persistence.*;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -36,6 +38,11 @@ public class Client implements UserDetails {
     private Family family;
     @OneToMany(mappedBy = "client")
     private List<Task> tasks = new ArrayList<>();
+    @OneToMany(mappedBy = "inviter")
+    private Set<Invitation> sentInvitations;
+
+    @OneToMany(mappedBy = "invitee")
+    private Set<Invitation> receivedInvitations;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
