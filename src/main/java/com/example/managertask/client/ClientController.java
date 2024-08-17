@@ -30,7 +30,9 @@ import java.util.Optional;
         try {
             ClientDto client = clientService.getUserById(id).orElseThrow();
             ClientDto clientPatched = applyPatch(client, patch);
-            clientService.updateUser(clientPatched);
+            if(clientPatched.getFamilyId()==null){
+                clientService.updateUser(clientPatched);
+            }else return ResponseEntity.unprocessableEntity().build();
         } catch (JsonPatchException | JsonProcessingException e) {
             return ResponseEntity.internalServerError().build();
         }catch (NoSuchElementException e){
