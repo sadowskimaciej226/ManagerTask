@@ -46,4 +46,16 @@ import java.util.Optional;
         JsonNode clientPatchedNode = patch.apply(clientNode);
         return objectMapper.treeToValue(clientPatchedNode, ClientDto.class);
     }
+    @PostMapping("/inviter/{inviterId}/invitee/{inviteeId}")
+    ResponseEntity<?> inviteClientToFamily(@PathVariable Long inviterId,
+                                           @PathVariable Long inviteeId){
+        try {
+            ClientDto inviter = clientService.getUserForCurrentUser(inviterId).orElseThrow();
+            ClientDto invitee = clientService.getUserById(inviteeId).orElseThrow();
+            clientService.inviteClientToFamily(inviter, invitee);
+        }catch (NoSuchElementException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
 }

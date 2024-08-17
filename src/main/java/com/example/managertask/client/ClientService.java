@@ -1,10 +1,15 @@
 package com.example.managertask.client;
 
+import com.example.managertask.client.invite.Invitation;
+import com.example.managertask.client.invite.InvitationRepository;
+import com.example.managertask.family.Family;
+import com.example.managertask.family.FamilyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -12,6 +17,9 @@ import java.util.Optional;
 public class ClientService {
     private final ClientRepository clientRepository;
     private final ClientDtoMapper clientDtoMapper;
+    private final FamilyRepository familyRepository;
+
+    private final InvitationRepository invitationRepository;
 
      Optional<ClientDto> getUserById(Long id) {
         return clientRepository.findById(id)
@@ -47,5 +55,29 @@ public class ClientService {
             throw new IllegalArgumentException();
         }
     }
+    void inviteClientToFamily(ClientDto inviterDto, ClientDto inviteeDto){
+        Client inviter = clientDtoMapper.map(inviterDto);
+        Client invitee = clientDtoMapper.map(inviteeDto);
+        Family family = familyRepository.findById(inviter.getFamily().getId()).orElseThrow();
+
+        var invitation = Invitation.builder()
+                .inviter(inviter)
+                .invitee(invitee)
+                .family(family)
+                .createdDate(LocalDateTime.now())
+                .build();
+        invitationRepository.save(invitation);
+    }
+     void joinFamily(Long inviteeId, Long familyId){
+        Family family = familyRepository.findById(familyId).orElseThrow();
+        Client invitee = clientRepository.findById(inviteeId).orElseThrow();
+        Invitation invitation = invitationRepository.findByFamilyAndInvitee(family, invitee).orElseThrow();
+        if(invitee.getFamily()==null){
+         invitee.setFamily(invitation.getFamily());
+         clientRepository.save(invitee);
+         invitationRepository.delete(invitation);
+        }else return;
+    }
+
 
 }
