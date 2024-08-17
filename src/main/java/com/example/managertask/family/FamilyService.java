@@ -28,6 +28,8 @@ public class FamilyService {
             Family toSave = familyDtoMapper.map(familyDto);
             toSave.setClients(List.of(client));
             Family saved = familyRepository.save(toSave);
+            client.setFamily(saved);
+            clientRepository.save(client);
             return familyDtoMapper.map(saved);
         }else {
             throw new IllegalArgumentException();
