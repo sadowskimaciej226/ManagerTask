@@ -3,14 +3,16 @@ package com.example.managertask.client.invite;
 import com.example.managertask.client.Client;
 import com.example.managertask.family.Family;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class Invitation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
