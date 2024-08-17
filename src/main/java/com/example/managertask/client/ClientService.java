@@ -38,7 +38,7 @@ public class ClientService {
             return client.map(clientDtoMapper::map);
         } else return Optional.empty();
     }
-    String getCurrentUsername() {
+    public String getCurrentUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
     }
