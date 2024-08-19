@@ -14,10 +14,10 @@ public class InvitationController {
     private final InvitationService invitationService;
 
     @GetMapping("/user/invitation")
-    ResponseEntity<List<InvitationDto>> getAllInvitationByUserId(){
-        if(invitationService.getAllInvitationByUserId().isEmpty()){
+    ResponseEntity<List<InvitationDto>> getAllUserInvitation(){
+        if(invitationService.getAllUserInvitation().isEmpty()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(invitationService.getAllInvitationByUserId());
+        return ResponseEntity.ok(invitationService.getAllUserInvitation());
     }
 }

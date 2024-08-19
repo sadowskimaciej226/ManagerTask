@@ -16,7 +16,7 @@ public class InvitationService {
     private final ClientService clientService;
     private final InvitationDtoMapper invitationDtoMapper;
     
-    List<InvitationDto> getAllInvitationByUserId(){
+    List<InvitationDto> getAllUserInvitation(){
         Client client = clientRepository.findClientByEmail(clientService.getCurrentUsername()).orElseThrow();
         List<Invitation> allByInviteeId = invitationRepository.findAllByInviteeId(client.getId());
         return allByInviteeId.stream().map(invitationDtoMapper::map).toList();
