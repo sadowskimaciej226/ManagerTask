@@ -58,4 +58,13 @@ import java.util.Optional;
         }
         return ResponseEntity.noContent().build();
     }
+    @PostMapping("/invitee/{inviteeId}/family/{familyId}")
+    ResponseEntity<?> joinTeam(@PathVariable Long inviteeId, @PathVariable Long familyId){
+        try {
+            clientService.joinFamily(inviteeId, familyId);
+        }catch (NoSuchElementException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
 }

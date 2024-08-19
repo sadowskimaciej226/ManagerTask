@@ -78,6 +78,4 @@ public class ClientService {
          invitationRepository.delete(invitation);
         }else return;
     }
-
-
 }
