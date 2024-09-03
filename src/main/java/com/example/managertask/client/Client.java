@@ -4,6 +4,9 @@ import com.example.managertask.client.invite.Invitation;
 import com.example.managertask.family.Family;
 import com.example.managertask.task.Task;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,12 +29,18 @@ public class Client implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Name can't be empty")
     private String firstName;
+    @NotBlank(message = "Name can't be empty")
     private String lastName;
+    @Email
     private String email;
+    @NotBlank(message = "password can't be empty")
     private String password;
     @Enumerated(EnumType.STRING)
+    @NotBlank
     private Role role;
+    @PositiveOrZero
     private int points;
     @ManyToOne
     @JoinColumn(name = "family_id")

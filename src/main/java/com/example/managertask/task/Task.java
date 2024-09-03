@@ -2,6 +2,8 @@ package com.example.managertask.task;
 
 import com.example.managertask.client.Client;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,12 +17,16 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Title can't be null")
     private String title;
     private String description;
+    @Future
     private LocalDateTime expirationTime;
     private LocalDateTime startTime;
     @Enumerated(EnumType.STRING)
+    @NotBlank(message = "Periodicity can't be empty")
     private Periodicity periodicity;
+    @NotBlank(message = "Completed must be known")
     private boolean done;
     @ManyToOne
     @JoinColumn(name = "client_id")
