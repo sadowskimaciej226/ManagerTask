@@ -38,7 +38,6 @@ public class Client implements UserDetails {
     @NotBlank(message = "password can't be empty")
     private String password;
     @Enumerated(EnumType.STRING)
-    @NotBlank
     private Role role;
     @PositiveOrZero
     private int points;
