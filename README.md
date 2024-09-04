@@ -11,4 +11,4 @@ This is my first bigger apllication and I am aware that there is still huge room
 - (work in progres) MySql/PostgreSql
 ## Introduction how to use it
 
-[Zobacz demo na YouTube](https://www.youtube.com/watch?v=bx1UV63uH-4)
+[Check out demo on youtube](https://www.youtube.com/watch?v=bx1UV63uH-4)
