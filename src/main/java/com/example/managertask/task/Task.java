@@ -24,9 +24,7 @@ public class Task {
     private LocalDateTime expirationTime;
     private LocalDateTime startTime;
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "Periodicity can't be empty")
     private Periodicity periodicity;
-    @NotBlank(message = "Completed must be known")
     private boolean done;
     @ManyToOne
     @JoinColumn(name = "client_id")
