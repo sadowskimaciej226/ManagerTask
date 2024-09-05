@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class InvitationController {
+ class InvitationController {
     private final InvitationService invitationService;
 
     @GetMapping("/user/invitation")

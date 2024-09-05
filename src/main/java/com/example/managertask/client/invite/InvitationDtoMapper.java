@@ -3,7 +3,7 @@ package com.example.managertask.client.invite;
 import org.springframework.stereotype.Service;
 
 @Service
-public class InvitationDtoMapper {
+ class InvitationDtoMapper {
     InvitationDto map(Invitation invitation){
         InvitationDto dto = new InvitationDto();
         dto.setInviterId(invitation.getInviter().getId());
