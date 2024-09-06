@@ -66,7 +66,9 @@ public class ClientService {
                 .family(family)
                 .createdDate(LocalDateTime.now())
                 .build();
-        invitationRepository.save(invitation);
+        if(invitationRepository.findByFamilyAndInvitee(family,invitee).isEmpty()) {
+            invitationRepository.save(invitation);
+        } //todo think about throwing exceptions
     }
      void joinFamily(Long inviteeId, Long familyId){
         Family family = familyRepository.findById(familyId).orElseThrow();
